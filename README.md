@@ -11,11 +11,7 @@ A full-stack e-commerce marketplace that connects buyers and sellers through a u
 - [System Architecture](#-system-architecture)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
-- [Environment Configuration](#-environment-configuration)
-- [Running the Application](#-running-the-application)
-- [Security Considerations](#-security-considerations)
 - [Future Improvements](#-future-improvements)
-- [Acknowledgements](#-acknowledgements)
 
 ##  Overview
 
