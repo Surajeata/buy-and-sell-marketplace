@@ -240,12 +240,3 @@ Potential improvements for further development include:
 - Performance optimization and database query improvements.
 - Deployment with a live demo and screenshots.
 
-## 📚 Acknowledgements
-
-This project is based on the [original E-Shop repository by OmairAftab](https://github.com/OmairAftab/E-shop).
-
-The original author and applicable project license should be credited and respected. Additional development, fixes, tests, and enhancements should be documented as they are completed.
-
----
-
-⭐ If you find this project useful, consider exploring the code, testing its features, and contributing meaningful improvements.
