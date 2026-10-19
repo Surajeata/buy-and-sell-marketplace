@@ -1,9 +1,9 @@
-# 🛍️ E-Shop — Multi-Vendor E-Commerce Marketplace
+#  E-Shop — Multi-Vendor E-Commerce Marketplace
 
 A full-stack e-commerce marketplace that connects buyers and sellers through a unified platform. The application includes product discovery, shopping carts, order management, seller dashboards, and real-time communication.
 
 
-## 📌 Table of Contents
+##  Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
@@ -17,7 +17,7 @@ A full-stack e-commerce marketplace that connects buyers and sellers through a u
 - [Future Improvements](#-future-improvements)
 - [Acknowledgements](#-acknowledgements)
 
-## 🚀 Overview
+##  Overview
 
 E-Shop is a multi-vendor marketplace designed to provide separate experiences for customers and sellers.
 
@@ -25,9 +25,9 @@ Customers can browse products, manage their shopping carts, place orders, and co
 
 The application uses a modular architecture that separates the frontend, backend API, and real-time communication service.
 
-## ✨ Features
+##  Features
 
-### 🛒 Buyer Features
+###  Buyer Features
 
 - Browse products and explore categories.
 - View product details, pricing, and reviews.
@@ -36,7 +36,7 @@ The application uses a modular architecture that separates the frontend, backend
 - Place orders and track order status.
 - Communicate with sellers through real-time messaging.
 
-### 🏪 Seller Features
+###  Seller Features
 
 - Register and manage a seller shop.
 - Create, update, and manage product listings.
@@ -46,14 +46,14 @@ The application uses a modular architecture that separates the frontend, backend
 - Create promotional events and discount coupons.
 - Access shop management features.
 
-### 💬 Real-Time Communication
+###  Real-Time Communication
 
 - Socket.IO-based messaging architecture.
 - Buyer-to-seller conversations.
 - Real-time message delivery.
 - Online presence and message status features, where supported by the implementation.
 
-### ⚙️ Application Features
+###  Application Features
 
 - REST API-based communication.
 - Centralized state management with Redux Toolkit.
@@ -64,7 +64,7 @@ The application uses a modular architecture that separates the frontend, backend
 
 *Feature availability depends on the configuration and implementation of the application.*
 
-## 🧰 Technology Stack
+##  Technology Stack
 
 | Layer | Technologies |
 |---|---|
@@ -79,7 +79,7 @@ The application uses a modular architecture that separates the frontend, backend
 | HTTP Client | Axios |
 | Version Control | Git and GitHub |
 
-## 🏗️ System Architecture
+##  System Architecture
 
 The application is organized into three primary services.
 
@@ -111,7 +111,7 @@ The application is organized into three primary services.
 - **Image storage:** Manages uploaded media through Cloudinary.
 - **Socket service:** Supports real-time communication between connected clients.
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 E-shop/
@@ -137,9 +137,8 @@ E-shop/
 └── README.md
 ```
 
-*The exact directory contents may vary by version.*
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -197,37 +196,8 @@ Once all services start successfully, open the local frontend URL printed by the
 
 > **Note:** The commands and environment variables may require adjustment based on the project's current configuration. Verify the scripts in each `package.json` before running the application.
 
-## 🔐 Environment Configuration
 
-Never commit credentials, API keys, passwords, or private connection strings to GitHub.
-
-The backend may require configuration values for:
-
-- MongoDB connection string
-- JWT and account activation secrets
-- Cloudinary credentials
-- SMTP email service
-- Server port and frontend origin
-
-The Socket.IO service may require its own port and CORS configuration.
-
-Check the existing source code to determine the exact variable names and file locations. Create local `.env` files containing your own credentials, and keep them excluded through `.gitignore`.
-
-You may add an `.env.example` file containing placeholder values to help other developers configure the project.
-
-## 🛡️ Security Considerations
-
-- Keep environment variables and credentials out of version control.
-- Validate and sanitize incoming user input.
-- Enforce authorization on protected backend endpoints.
-- Use secure password hashing and authentication practices.
-- Validate uploaded files and restrict their allowed types and sizes.
-- Configure CORS and cookie settings appropriately for local development and production.
-- Use HTTPS and secure cookie settings in production.
-
-These are recommended practices; verify each one against the actual implementation before considering it complete.
-
-## 🔮 Future Improvements
+##  Future Improvements
 
 Potential improvements for further development include:
 
