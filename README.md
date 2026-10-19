@@ -1,176 +1,252 @@
-# 🛒 E-Shop — Multi-Vendor E-Commerce Platform
+# 🛍️ E-Shop — Multi-Vendor E-Commerce Marketplace
 
-E-Shop is a state-of-the-art, production-ready, full-stack multi-vendor e-commerce application built on the **MERN Stack** (MongoDB, Express, React, Node.js) and powered by **Socket.io** for real-time messaging. Designed with a dual-role architecture, it provides separate, isolated portals and authentication systems for **Buyers** and **Sellers**.
+A full-stack e-commerce marketplace that connects buyers and sellers through a unified platform. The application includes product discovery, shopping carts, order management, seller dashboards, and real-time communication.
 
----
+> **Project note:** This repository is based on the open-source E-Shop project by [OmairAftab](https://github.com/OmairAftab/E-shop). It is being used as a learning and development project. Refer to the original repository and its license for attribution and usage terms.
 
-## 🌟 Key Features
+## 📌 Table of Contents
 
-### 👤 Buyer / Customer Experience
-- **Interactive Home Page:** Promoted product sliders, featured categories, best-selling showcases, and active promotional events.
-- **Advanced Filtering & Details:** Filter products by category. View rich product description pages with customer reviews.
-- **Cart & Wishlist Systems:** Fully managed via Redux Toolkit with automated `localStorage` persistence across sessions.
-- **Secure Checkout & Order Management:** Multistep checkout flow (Shipping Details, Order Confirmation, etc). Order tracking console showing real-time delivery status updates.
-- **Product Reviews:** Write and edit reviews with star ratings and comments after receiving orders.
-- **Real-Time Customer Support:** Chat directly with shop owners/sellers.
+- [Overview](#-overview)
+- [Features](#-features)
+- [Technology Stack](#-technology-stack)
+- [System Architecture](#-system-architecture)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Environment Configuration](#-environment-configuration)
+- [Running the Application](#-running-the-application)
+- [Security Considerations](#-security-considerations)
+- [Future Improvements](#-future-improvements)
+- [Acknowledgements](#-acknowledgements)
 
-### 🏢 Seller / Merchant Portal
-- **Shop Onboarding & Management:** Dedicated registration for sellers with customizable shop names, avatars, and descriptions.
-- **Seller Dashboard:** Interactive panel detailing analytics.
-- **Rich Product Manager:** Multi-image uploads via Cloudinary & Multer with price, discount, inventory, and category tracking.
-- **Promotional Events:** Create time-bound promotional events with special pricing tiers.
-- **Discount Coupon System:** Generate custom coupon codes with eligibility criteria.
-- **Order Fulfillment Pipeline:** Detailed order lists with status transitions (e.g., *Processing*, *Shipped*, *Delivered*, *Refunded*).
-- **Settings Panel:** Update shop metadata, change password, and manage shop avatars dynamically.
+## 🚀 Overview
 
-### ⚡ Real-Time Communication Hub
-- **Socket.io Integration:** Dual-way socket server matching active connection states.
-- **Instant Messaging:** Real-time customer-to-seller messaging with image attachment support.
-- **Read Receipts:** Visual indicator showing whether the message has been viewed.
-- **Online Status:** Real-time presence detection showing online/offline status for active chats.
+E-Shop is a multi-vendor marketplace designed to provide separate experiences for customers and sellers.
 
----
+Customers can browse products, manage their shopping carts, place orders, and communicate with sellers. Sellers can manage their shops, publish products, track orders, and create promotional offers.
 
-## ⚙️ Architecture & Tech Stack
+The application uses a modular architecture that separates the frontend, backend API, and real-time communication service.
 
-### Frontend Directory (`/frontend`)
-- **Library:** React (v19)
-- **State Management:** Redux Toolkit & Redux Thunk (Cart state, User slice, Seller slice, Products/Events hooks)
-- **Styling:** Tailwind CSS & Material UI (MUI) components (including `@mui/x-data-grid` for administrative data tables)
-- **Routing:** React Router DOM (v7) with role-based Route Guards (`ProtectedRoute` for buyers, `SellerAuthRoute` for active sellers, and `SellerRedirectRoute` for onboarding redirection)
-- **Interceptors:** Axios (configured with credentials support for HttpOnly cookies)
+## ✨ Features
 
-### Backend Directory (`/backend`)
-- **Runtime:** Node.js & Express
-- **Database:** MongoDB & Mongoose ORM
-- **Authentication:** Dual JWT token strategies utilizing HttpOnly cookies (`token` for buyers, `seller_token` for sellers) with custom verification middleware (`isAuthenticated`, `isSeller`)
-- **Storage:** Multer middleware paired with Cloudinary for handling and storing cloud image assets
-- **Communication:** Nodemailer (using SMTP Brevo relay service) for automated account emails and confirmation hooks
-- **Error Handling:** Standardized error-handling middleware (`catchAsyncErrors` and an express-wide error controller)
+### 🛒 Buyer Features
 
-### Socket.io Directory (`/socketIO`)
-- A standalone, event-driven Node.js helper service managing real-time chat handshakes, status broadcasts, and notification emissions.
+- Browse products and explore categories.
+- View product details, pricing, and reviews.
+- Manage shopping carts and wishlists.
+- Register, log in, and manage account information.
+- Place orders and track order status.
+- Communicate with sellers through real-time messaging.
 
----
+### 🏪 Seller Features
 
-## 📂 Project Directory Structure
+- Register and manage a seller shop.
+- Create, update, and manage product listings.
+- Upload product images.
+- Manage inventory and pricing.
+- Track orders and update fulfillment status.
+- Create promotional events and discount coupons.
+- Access shop management features.
+
+### 💬 Real-Time Communication
+
+- Socket.IO-based messaging architecture.
+- Buyer-to-seller conversations.
+- Real-time message delivery.
+- Online presence and message status features, where supported by the implementation.
+
+### ⚙️ Application Features
+
+- REST API-based communication.
+- Centralized state management with Redux Toolkit.
+- MongoDB data persistence.
+- Authentication and protected application routes.
+- Cloudinary integration for image storage.
+- Modular backend controllers, models, and middleware.
+
+*Feature availability depends on the configuration and implementation of the application.*
+
+## 🧰 Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React, JavaScript, Redux Toolkit |
+| UI and Styling | Tailwind CSS, Material UI |
+| Routing | React Router |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| Authentication | JSON Web Tokens (JWT), cookies |
+| Real-Time Communication | Socket.IO |
+| Image Management | Cloudinary, Multer |
+| HTTP Client | Axios |
+| Version Control | Git and GitHub |
+
+## 🏗️ System Architecture
+
+The application is organized into three primary services.
+
+```text
+                 ┌─────────────────────┐
+                 │   React Frontend    │
+                 │ Buyers and Sellers  │
+                 └──────────┬──────────┘
+                            │
+                 ┌──────────▼──────────┐
+                 │   Express Backend   │
+                 │     REST APIs       │
+                 └──────┬────────┬─────┘
+                        │        │
+                ┌───────▼───┐  ┌─▼──────────┐
+                │  MongoDB  │  │ Cloudinary │
+                │  Database │  │   Images   │
+                └───────────┘  └────────────┘
+
+                 ┌─────────────────────┐
+                 │   Socket.IO Server  │
+                 │ Real-Time Messaging │
+                 └─────────────────────┘
+```
+
+- **Frontend:** Renders the user interface and manages client-side state.
+- **Backend:** Processes API requests, authentication, and marketplace operations.
+- **Database:** Stores application records in MongoDB.
+- **Image storage:** Manages uploaded media through Cloudinary.
+- **Socket service:** Supports real-time communication between connected clients.
+
+## 📂 Project Structure
 
 ```text
 E-shop/
-├── backend/                  # Node.js + Express API
-│   ├── config/               # Environment configuration (.env)
-│   ├── controller/           # Router endpoints (user, shop, product, order, coupon, etc.)
-│   ├── db/                   # MongoDB connection logic
-│   ├── middleware/           # Authentication guards & error handlers
-│   ├── model/                # Mongoose Database schemas
-│   ├── utils/                # Helper files (JWT tokens, mail senders, custom errors)
-│   ├── app.js                # Express app setup, routing definition & cors configurations
-│   └── server.js             # Entrypoint server execution script
-│
-├── frontend/                 # React SPA (Client side)
-│   ├── public/               # Public assets & HTML template
-│   └── src/                  # React components & screens
-│       ├── Components/       # Modular UI blocks (Cart, Wishlist, Profile, Layout)
-│       ├── Pages/            # Route level pages (HomePage, ShopDashboard, Inbox, Checkouts)
-│       ├── redux/            # Redux store, actions, and reducers configuration
-│       ├── routes/           # Protected routing components
-│       ├── App.js            # Router layout mapping
-│       ├── index.js          # Root DOM renderer
-│       └── server.js         # Production vs Localhost backend API URL configuration
-│
-└── socketIO/                 # Real-time websocket gateway
-    ├── index.js              # Event handlers for instant messaging
-    └── package.json          # Socket-level dependencies
+├── backend/
+│   ├── config/
+│   ├── controller/
+│   ├── db/
+│   ├── middleware/
+│   ├── model/
+│   ├── routes/
+│   ├── utils/
+│   └── app.js
+├── frontend/
+│   ├── public/
+│   └── src/
+├── socketIO/
+│   ├── index.js
+│   └── package.json
+├── uploads/
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
----
+*The exact directory contents may vary by version.*
 
-## 🛠️ Environment Variables Configuration
-
-To run E-Shop locally, configure environment files in both the backend and socketIO directories:
-
-### Backend `.env` (`backend/config/.env`)
-```env
-PORT=8000
-DB_URL=your_mongodb_connection_string
-JWT_SECRET_KEY=your_jwt_secret_key
-JWT_EXPIRES=7d
-ACTIVATION_SECRET=your_account_activation_secret
-
-# SMTP Server Configurations (Email)
-SMTP_HOST=smtp-relay.brevo.com
-SMTP_PORT=587
-SMTP_USER=your_smtp_user
-SMTP_PASS=your_smtp_password
-
-# Cloudinary Storage Configuration
-CLOUDINARY_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-```
-
-### SocketIO `.env` (`socketIO/.env`)
-```env
-PORT=4000
-```
-
----
-
-## 🚀 Getting Started (Local Development)
-
-Follow these instructions to run the application on your local machine:
+## 🛠️ Getting Started
 
 ### Prerequisites
-- Node.js installed (v18+ recommended)
-- MongoDB Atlas cluster or local instance running
-- Cloudinary credentials
 
-### Step 1: Install Dependencies
-From the root workspace folder, install all required dependencies for all parts of the application:
+Install the following before running the application:
+
+- [Node.js and npm](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- A MongoDB database, local or hosted
+- A Cloudinary account for image uploads
+- Email service credentials if account email functionality is enabled
+
+### 1. Clone the repository
+
+Replace the URL with your own GitHub repository URL.
+
 ```bash
-# Install root/general scripts
+git clone https://github.com/YOUR-USERNAME/buy-and-sell-marketplace.git
+cd buy-and-sell-marketplace
+```
+
+### 2. Install dependencies
+
+Install dependencies for each application component:
+
+```bash
 npm install
 
-# Install backend dependencies
 cd backend
 npm install
 
-# Install frontend dependencies
 cd ../frontend
 npm install
 
-# Install socketIO dependencies
 cd ../socketIO
 npm install
 ```
 
-### Step 2: Run the Application
-You can run the modules concurrently or open separate terminals for each component.
+Return to the project root when needed:
 
-#### Terminal 1: Backend Server (runs on Port `8000`)
 ```bash
-cd backend
-npm run dev
-# or from root directory:
-npm run dev
+cd ..
 ```
 
-#### Terminal 2: Frontend App (runs on Port `3000`)
-```bash
-cd frontend
-npm start
-```
+### 3. Configure environment variables
 
-#### Terminal 3: Socket.IO Gate (runs on Port `4000`)
-```bash
-cd socketIO
-node index.js
-```
+Create local environment files based on the configuration expected by each service. See the [Environment Configuration](#-environment-configuration) section.
+
+### 4. Start the services
+
+Open separate terminals for the backend, frontend, and Socket.IO service. Use the commands specified in each directory's `package.json`.
+
+### 5. Open the application
+
+Once all services start successfully, open the local frontend URL printed by the development server.
+
+> **Note:** The commands and environment variables may require adjustment based on the project's current configuration. Verify the scripts in each `package.json` before running the application.
+
+## 🔐 Environment Configuration
+
+Never commit credentials, API keys, passwords, or private connection strings to GitHub.
+
+The backend may require configuration values for:
+
+- MongoDB connection string
+- JWT and account activation secrets
+- Cloudinary credentials
+- SMTP email service
+- Server port and frontend origin
+
+The Socket.IO service may require its own port and CORS configuration.
+
+Check the existing source code to determine the exact variable names and file locations. Create local `.env` files containing your own credentials, and keep them excluded through `.gitignore`.
+
+You may add an `.env.example` file containing placeholder values to help other developers configure the project.
+
+## 🛡️ Security Considerations
+
+- Keep environment variables and credentials out of version control.
+- Validate and sanitize incoming user input.
+- Enforce authorization on protected backend endpoints.
+- Use secure password hashing and authentication practices.
+- Validate uploaded files and restrict their allowed types and sizes.
+- Configure CORS and cookie settings appropriately for local development and production.
+- Use HTTPS and secure cookie settings in production.
+
+These are recommended practices; verify each one against the actual implementation before considering it complete.
+
+## 🔮 Future Improvements
+
+Potential improvements for further development include:
+
+- Automated unit and integration tests.
+- CI/CD using GitHub Actions.
+- Docker-based development and deployment.
+- Improved product search, sorting, and filtering.
+- Accessibility and responsive UI enhancements.
+- Better error handling, logging, and API documentation.
+- Performance optimization and database query improvements.
+- Deployment with a live demo and screenshots.
+
+## 📚 Acknowledgements
+
+This project is based on the [original E-Shop repository by OmairAftab](https://github.com/OmairAftab/E-shop).
+
+The original author and applicable project license should be credited and respected. Additional development, fixes, tests, and enhancements should be documented as they are completed.
 
 ---
 
-## 🚢 Deployment Notes
-
-- **Backend:** Successfully configured for cloud hosting engines (e.g., Render) using cookie configurations optimized for production (`sameSite: 'none'`, `secure: true`).
-- **Frontend:** Compatible with hosting on Vercel/Netlify. Ensure `frontend/src/server.js` points to the correct backend API hostname.
-- **Images:** All uploads go through Cloudinary. If hosting on platforms like Heroku/Render, local uploads will not persist; Cloudinary integration handles this seamlessly.
+⭐ If you find this project useful, consider exploring the code, testing its features, and contributing meaningful improvements.
