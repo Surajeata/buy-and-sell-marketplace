@@ -2,7 +2,6 @@
 
 A full-stack e-commerce marketplace that connects buyers and sellers through a unified platform. The application includes product discovery, shopping carts, order management, seller dashboards, and real-time communication.
 
-> **Project note:** This repository is based on the open-source E-Shop project by [OmairAftab](https://github.com/OmairAftab/E-shop). It is being used as a learning and development project. Refer to the original repository and its license for attribution and usage terms.
 
 ## 📌 Table of Contents
 
